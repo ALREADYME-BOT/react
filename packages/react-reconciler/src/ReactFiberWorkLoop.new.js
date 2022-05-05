@@ -1603,6 +1603,11 @@ export function isAlreadyRendering() {
   );
 }
 
+export function isAlreadyRenderingProd() {
+  // Used to throw if certain APIs are called from the wrong context.
+  return (executionContext & RenderContext) !== NoContext;
+}
+
 export function flushControlled(fn: () => mixed): void {
   const prevExecutionContext = executionContext;
   executionContext |= BatchedContext;
